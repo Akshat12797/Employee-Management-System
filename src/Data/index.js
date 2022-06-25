@@ -27,3 +27,6 @@ const employeesData = [
         date: '2019-05-16'
     },
 ]
+
+export { employeesData };
+
