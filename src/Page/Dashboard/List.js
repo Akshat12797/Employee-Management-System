@@ -9,8 +9,6 @@ function List({ employees, handleDelete, handleEdit }) {
   }
   );
 
-  console.log(employees.length);
-
   return (
     <div className='contain-table'>
       <table className='striped-table'>

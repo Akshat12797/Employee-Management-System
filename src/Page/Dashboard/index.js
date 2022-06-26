@@ -18,11 +18,42 @@ function Dashboard() {
 
 
     const handleEdit = (id) => {
-console.log('Eid', id);
+        const [employee] = employees.filter(employee =>
+            employee.id === id   );
+
+            setSelectedEmployee(employee);
+            setIsEditing(true);
     }
     const handleDelete = (id) => {
-console.log('Did', id)
+        Swal.fire({
+            icon: "warning",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel"  
+          }).then(result =>
+            {
+                if(result.value){
+                    const [employee] = employees.filter(employee =>
+                     employee.id === id   );
+                     Swal.fire({
+                        icon: "success",
+                        title: "Deleted",
+                        text: `${employee.firstName} ${employee.lastName}
+                        's data has been deleted`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+
+                      setEmployees(employees.filter(employee => employee.id
+                        !== id))
+                }
+            }
+            );
     }
+
+
     return (
 
         <div className='container'>
@@ -51,7 +82,7 @@ console.log('Did', id)
             )}
             {/* Edit */}
             {isEditing && (
-                <Add
+                <Edit
                     employees={employees}
                     selectedEmployee={selectedEmployee}
                     setEmployees={setEmployees}
